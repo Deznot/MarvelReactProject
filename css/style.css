@@ -52,6 +52,12 @@ html {
   box-sizing: inherit;
 }
 
+body {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 500;
+}
+
 .app {
   max-width: 1100px;
   margin: 0 auto;
@@ -60,9 +66,26 @@ html {
 .header {
   display: flex;
   justify-content: space-between;
+  padding-top: 50px;
 }
 
-.header__menu {}
+.header__logo a span {
+  color: #9F0013;
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.header__logo a {
+  color: #000000;
+  font-size: 28px;
+}
+
+.header__menu {
+  font-size: 24px;
+  color: #000000;
+  font-weight: bold;
+  font-weight: 700;
+}
 
 .header__menu-nav {}
 
@@ -70,4 +93,126 @@ html {
   display: flex;
 }
 
-.header__menu-item {}
+.header__menu-list {
+}
+
+.header__menu-item {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.header__menu-item:last-child {
+  margin-right: 0px;
+}
+
+.header__link {
+  text-decoration: none;
+  color: inherit;
+  line-height: 28px;
+}
+
+.header__link:hover, .header__link:focus, .header__link:active {
+  text-decoration: none;
+
+}
+
+.header__menu-item a span {
+  color: #9F0013;
+}
+
+.randomChar {
+  padding-top: 137px;
+  display: flex;
+  height: calc(250+137)px;
+  flex-shrink: 0; 
+}
+
+.randomChar__block {
+  display: flex;
+  width: 550px;
+  background: #FFF;
+  box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.25); 
+}
+
+.randomChar__block img{
+  width: 180px;
+  height: 180px; 
+  margin: 35px;
+}
+
+.randomChar__info {
+  margin-top: 35px;
+}
+
+.randomChar__title {
+  margin-bottom: 13px;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal; 
+}
+
+.randomChar__descr {
+  color: #000;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal; 
+  margin-bottom: 24px;
+}
+
+.randomChar__buttons {
+  display: flex;
+}
+
+.randomChar__button-left {
+  background: #9F0013; 
+  width: 101px;
+  height: 38px; 
+  margin-right: 30px;
+  font-size: 14px; 
+  color: #ffffff;
+  position: relative;
+}
+
+.randomChar__button-right {
+  background: #5C5C5C; 
+  width: 101px;
+  height: 38px; 
+  font-size: 14px; 
+  color: #ffffff;
+}
+
+.randomChar__another {
+  width: 550px;
+  background: #232222;
+  box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.25); 
+  color: #FFF;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal; 
+}
+
+.randomChar__another {
+  position: relative;
+}
+
+.randomChar__title {
+  margin-bottom: 40px;
+}
+
+.randomChar__title:nth-child(2) {
+  margin-left: 40px;
+}
+
+.randomChar__button {
+  margin-left: 40px;
+}
+
+.randomChar__decoration {
+  position: absolute;
+  bottom: 14px;
+  right: -37px;
+}
