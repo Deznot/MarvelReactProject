@@ -5,7 +5,7 @@ const SingleComics = () => {
 
     return (
         <div className="singleComics">
-            <img src={single} alt="Comics image" className="singleComics__img" />
+            <img src={single} alt="Comics" className="singleComics__img" />
             <div className="singleComics__info">
                 <p className="singleComics__title">X-Men: Days of Future Past</p>
                 <p className="singleComics__descr">

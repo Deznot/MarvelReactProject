@@ -1,0 +1,26 @@
+@import "../../style/variables.scss";
+
+.charAbout {
+    display: grid;
+    grid-template-columns: 293px auto;
+    gap: 50px;
+    &__img {
+        width: 293px;
+        height: 293px; 
+    }
+    &__name {
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal; 
+        margin-bottom: 25px;
+    }
+    &__descr {
+        width: 550px;
+        color: #000;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal; 
+    }
+}

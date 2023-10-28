@@ -10,6 +10,7 @@ import AppBanner from "../appBanner/AppBanner";
 import ComicsList from "../comicsList/ComicsList";
 import SingleComics from "../singleComics/SingleComics";
 import SelectChar from "../selectChar/SelectChar";
+import CharAbout from "../charAbout/CharAbout";
 
 class App extends Component {
     constructor(props) {
@@ -21,16 +22,12 @@ class App extends Component {
             <div className="app">
                 <AppHeader/>
                 <main>
-                    <AppBanner/>
-                    <SelectChar />
-                    {/* <SingleComics /> */}
-                    {/* <ComicsList /> */}
-                    {/* <RandomChar />
+                    <RandomChar />
                     <div className="char__wrapper">
                         <CharList />
                         <CharInfo />
                     </div>
-                    <img className="vision" src={vision} alt="vision"/> */}
+                    <img className="vision" src={vision} alt="vision"/>
                 </main>
             </div>
         )
