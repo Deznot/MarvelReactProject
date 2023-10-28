@@ -1,0 +1,55 @@
+@import "../../style/variables.scss";
+
+.singleComics {
+    display: grid;
+    grid-template-columns: 293px 550px auto;
+    column-gap: 50px;
+    align-items: start;
+    &__img {
+        width: 293px;
+        height: 450px; 
+        object-fit: cover;
+    }
+    &__info {
+        font-style: normal;
+        line-height: normal; 
+        margin-bottom: 25px;
+    }
+    &__title{
+        color: #000;
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 25px;
+    }
+    &__descr{
+        font-size: 18px;
+        font-weight: 400;
+        margin-bottom: 25px;
+    }
+    &__pages{
+        font-size: 18px;
+        font-weight: 400;
+        margin-bottom: 25px;
+    }
+    &__lang{
+        font-size: 18px;
+        font-weight: 400;
+        margin-bottom: 25px;
+    }
+    &__price{
+        color: $main-color;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 25px;
+    }
+    &__back {
+        justify-self: end;
+        color: #000;
+        font-size: 18px;
+        font-weight: 700;
+        &:hover{
+            color: $main-color;
+        }
+    }
+}
+

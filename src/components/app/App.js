@@ -8,7 +8,7 @@ import CharInfo from "../charInfo/CharInfo";
 import vision from "../../resources/img/vision.png"
 import AppBanner from "../appBanner/AppBanner";
 import ComicsList from "../comicsList/ComicsList";
-
+import SingleComics from "../singleComics/SingleComics";
 
 class App extends Component {
     constructor(props) {
@@ -21,7 +21,8 @@ class App extends Component {
                 <AppHeader/>
                 <main>
                     <AppBanner/>
-                    <ComicsList />
+                    <SingleComics />
+                    {/* <ComicsList /> */}
                     {/* <RandomChar />
                     <div className="char__wrapper">
                         <CharList />
