@@ -52,3 +52,10 @@ p {
     column-gap: 25px;
     align-items: start;
   }
+
+  .vision {
+    position: absolute;
+    right: -174px;
+    bottom: -70px;
+    z-index: -1;
+  }

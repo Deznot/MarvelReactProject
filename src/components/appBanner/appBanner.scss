@@ -1,0 +1,21 @@
+@import '../../style/variables.scss';
+
+.app {
+    &__banner {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 152px auto 133px;
+        background-color: $dark;
+        padding: 0 25px 0 45px;
+        margin-bottom: 50px;
+        &-text {
+            align-self: center;
+            margin-left: 83px;
+            color: #FFF;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal; 
+        }
+    }
+}
