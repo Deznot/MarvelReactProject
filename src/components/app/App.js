@@ -2,6 +2,7 @@ import { Component } from "react";
 import "../../style/variables.scss";
 import "../../style/style.scss";
 import AppHeader from "../appHeader/AppHeader";
+import RandomChar from "../randomChar/RandomChar";
 
 
 class App extends Component {
@@ -13,6 +14,9 @@ class App extends Component {
         return (
             <div className="app">
                 <AppHeader/>
+                <main>
+                    <RandomChar />
+                </main>
             </div>
         )
     }

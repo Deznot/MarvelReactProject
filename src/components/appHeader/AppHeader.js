@@ -3,18 +3,18 @@ import "./AppHeader.scss";
 const AppHeader = (props) => {
 
     return (
-        <header class="header">
-            <div class="header__logo">
-                <a href="#" class="header__logo-link">
+        <header className="header">
+            <div className="header__logo">
+                <a href="#" className="header__logo-link">
                     <span>Marvel</span> information portal
                 </a>
             </div>
-            <div class="header__menu">
-                <nav class="header__menu-nav">
-                    <ul class="header__menu-list">
-                        <li class="header__menu-item"><a class="header__link" href="#"><span>Characters</span></a></li>
+            <div className="header__menu">
+                <nav className="header__menu-nav">
+                    <ul className="header__menu-list">
+                        <li className="header__menu-item"><a className="header__link" href="#"><span>Characters</span></a></li>
                         /
-                        <li class="header__menu-item"><a class="header__link" href="#">Comics</a></li>
+                        <li className="header__menu-item"><a className="header__link" href="#">Comics</a></li>
                     </ul>
                 </nav>
             </div>
