@@ -7,6 +7,7 @@ import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
 import vision from "../../resources/img/vision.png"
 import AppBanner from "../appBanner/AppBanner";
+import ComicsList from "../comicsList/ComicsList";
 
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
                 <AppHeader/>
                 <main>
                     <AppBanner/>
+                    <ComicsList />
                     {/* <RandomChar />
                     <div className="char__wrapper">
                         <CharList />
