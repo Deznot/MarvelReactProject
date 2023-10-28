@@ -1,4 +1,4 @@
-import "./CharList.scss";
+import "./charList.scss";
 import char from "../../resources/img/abyss.jpg";
 
 const CharList = (props) => {

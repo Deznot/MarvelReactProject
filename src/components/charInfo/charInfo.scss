@@ -1,0 +1,61 @@
+@import "../../style/variables.scss";
+
+.char {
+    &__basics {
+        display: grid;
+        grid-template-columns: 150px auto;
+        column-gap: 25px;
+        img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+        & .char__name {
+            color: #000000;
+            font-size: 22px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            margin-bottom: 35px;
+        }
+    }
+
+    &__info {
+        background: #FFF;
+        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.25);
+        padding: 25px;
+    }
+    &__descr {
+        margin-bottom: 10px;
+        p {
+            color: #000;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+    }
+    &__comics {
+        &-title {
+            color: #000;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal; 
+        }
+        &-item {
+            background: #FFF;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            margin-bottom: 10px;
+        }
+        &-item:last-child {
+            margin-bottom: 0px;
+        }
+    }
+    &__buttons {
+        button {
+            margin-bottom: 10px;
+        }
+        
+    }
+}
