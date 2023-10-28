@@ -3,6 +3,7 @@ import "../../style/variables.scss";
 import "../../style/style.scss";
 import AppHeader from "../appHeader/AppHeader";
 import RandomChar from "../randomChar/RandomChar";
+import CharList from "../charList/CharList";
 
 
 class App extends Component {
@@ -16,6 +17,9 @@ class App extends Component {
                 <AppHeader/>
                 <main>
                     <RandomChar />
+                    <div className="char__wrapper">
+                        <CharList />
+                    </div>
                 </main>
             </div>
         )

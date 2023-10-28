@@ -88,64 +88,6 @@ body {
   position: relative;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 50px;
-}
-
-.header__logo a span {
-  color: #9F0013;
-  font-weight: bold;
-  font-size: 28px;
-}
-
-.header__logo a {
-  color: #000000;
-  font-size: 28px;
-}
-
-.header__menu {
-  font-size: 24px;
-  color: #000000;
-  font-weight: bold;
-  font-weight: 700;
-}
-
-.header__menu-nav {}
-
-.header__menu-list {
-  display: flex;
-}
-
-.header__menu-list {}
-
-.header__menu-item {
-  margin-left: 8px;
-  margin-right: 8px;
-}
-
-.header__menu-item:last-child {
-  margin-right: 0px;
-}
-
-.header__link {
-  text-decoration: none;
-  color: inherit;
-  line-height: 28px;
-}
-
-.header__link:hover,
-.header__link:focus,
-.header__link:active {
-  text-decoration: none;
-
-}
-
-.header__menu-item a span {
-  color: #9F0013;
-}
-
 .randomChar {
   padding-top: 137px;
   display: flex;
