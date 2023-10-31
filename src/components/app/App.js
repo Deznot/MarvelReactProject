@@ -13,25 +13,29 @@ import SelectChar from "../selectChar/SelectChar";
 import CharAbout from "../charAbout/CharAbout";
 
 class App extends Component {
-    constructor(props) {
-        super(props);
+    state = {
+        selectedChar: null
+    }
+
+    onCharSelected = (id) => {
+        this.setState({ selectedChar: id });
     }
 
     render() {
         return (
             <div className="app">
-                <AppHeader/>
+                <AppHeader />
                 <main>
                     <RandomChar />
                     <div className="char__wrapper">
-                        <CharList />
-                        <CharInfo />
+                        <CharList onCharSelected={this.onCharSelected} />
+                        <CharInfo cahrId={this.state.selectedChar} />
                     </div>
-                    <img className="vision" src={vision} alt="vision"/>
+                    <img className="vision" src={vision} alt="vision" />
                 </main>
             </div>
         )
     }
-} 
+}
 
 export default App;

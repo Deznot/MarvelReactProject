@@ -1,12 +1,72 @@
+import { Component } from "react";
 import "./charInfo.scss";
-import thor from "../../resources/img/thor.jpeg"
+import ErrorMessage from "../errorMessage/ErrorMessage";
+import Spinner from "../spinner/Spinner";
+import MarvelService from "../../services/MarvelService";
+import SelectChar from "../selectChar/SelectChar";
+import thor from "../../resources/img/thor.jpeg";
 
+class CharInfo extends Component {
+    state = {
+        char: {},
+        loading: false,
+        error: false,
+    }
 
-const CharInfo = () => {
+    marvelService = new MarvelService();
+
+    componentDidMount() {
+        this.updateChar();
+    }
+
+    onError = () => {
+        this.setState({ error: true, loading: false });
+    }
+
+    onCharLoaded = (char) => {
+        this.setState({ char, loading: false });
+    };
+
+    onCharLoading = () => {
+        this.setState({ loading: true });
+    }
+
+    updateChar() {
+        const { charId } = this.props;
+        if (!charId) return;
+
+        this.onCharLoading();
+
+        this.MarvelService
+            .getCharacter(charId)
+            .then(this.onCharLoaded)
+            .catch(this.onError)
+
+    }
+
+    render() {
+        const { char, loading, error } = this.state;
+        const selectChar = char || loading || error ? null : <SelectChar />;
+        const errorMessage = error ? <ErrorMessage /> : null;
+        const spinner = loading ? <Spinner /> : null;
+        const content = !(loading || errorMessage || !char) ? <View char={char} /> : null;
+        return (
+            <div className="char__info">
+                {selectChar}
+                {errorMessage}
+                {spinner}
+                {content}
+            </div>
+        );
+    }
+};
+
+const View = ({ char }) => {
+    // const { id, name, description, thumbnail, homepage, wiki } = this.state;
     return (
-        <div className="char__info">
+        <>
             <div className="char__basics">
-                <img src={thor} alt="hero img"/>
+                <img src={thor} alt="hero img" />
                 <div>
                     <div className="char__name">LOKI</div>
                     <div className="char__buttons">
@@ -52,8 +112,8 @@ const CharInfo = () => {
                     <li className="char__comics-item">Avengers (1996) #1</li>
                 </ul>
             </div>
-        </div>
-    );
-};
+        </>
+    )
+}
 
 export default CharInfo;
