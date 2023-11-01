@@ -29,7 +29,7 @@ class App extends Component {
                     <RandomChar />
                     <div className="char__wrapper">
                         <CharList onCharSelected={this.onCharSelected} />
-                        <CharInfo cahrId={this.state.selectedChar} />
+                        <CharInfo charId={this.state.selectedChar} />
                     </div>
                     <img className="vision" src={vision} alt="vision" />
                 </main>
