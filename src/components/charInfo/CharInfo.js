@@ -55,6 +55,7 @@ class CharInfo extends Component {
         const errorMessage = error ? <ErrorMessage /> : null;
         const spinner = loading ? <Spinner /> : null;
         const content = !(loading || errorMessage || !char) ? <View char={char} /> : null;
+
         return (
             <div className="char__info">
                 {selectChar}
@@ -68,10 +69,23 @@ class CharInfo extends Component {
 
 const View = ({ char }) => {
     const { name, description, thumbnail, homepage, wiki, comics } = char;
+    const comicsListHandler = (comics) => {
+        const maxList = 10;
+        let comicsRes = comics.map((item,i) => {
+            return  <li key={i} className="char__comics-item">{item.name}</li>;
+        });
+        comicsRes = comicsRes.filter(item => item.key < maxList );
+        return comicsRes.length > 0? comicsRes: "No comics";
+    };
+    let objectFit = 'cover';
+    if (thumbnail === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg") {
+        objectFit = 'unset';
+    }
+
     return (
         <>
             <div className="char__basics">
-                <img src={thumbnail} alt={name} />
+                <img src={thumbnail} alt={name} style={{objectFit : objectFit}}/>
                 <div>
                     <div className="char__name">{name}</div>
                     <div className="char__buttons">
@@ -94,10 +108,7 @@ const View = ({ char }) => {
                     Comics:
                 </div>
                 <ul className="char__comics-list">
-                    {comics.map((item,i) => {
-                        return  <li key={i} className="char__comics-item">{item.name}</li>;
-                    })}
-                   
+                    {comicsListHandler(comics)}
                 </ul>
             </div>
         </>
