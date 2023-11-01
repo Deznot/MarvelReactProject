@@ -11,6 +11,7 @@ import ComicsList from "../comicsList/ComicsList";
 import SingleComics from "../singleComics/SingleComics";
 import SelectChar from "../selectChar/SelectChar";
 import CharAbout from "../charAbout/CharAbout";
+import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 
 class App extends Component {
     state = {
@@ -26,10 +27,16 @@ class App extends Component {
             <div className="app">
                 <AppHeader />
                 <main>
-                    <RandomChar />
+                    <ErrorBoundary>
+                        <RandomChar />
+                    </ErrorBoundary>
                     <div className="char__wrapper">
-                        <CharList onCharSelected={this.onCharSelected} />
-                        <CharInfo charId={this.state.selectedChar} />
+                        <ErrorBoundary>
+                            <CharList onCharSelected={this.onCharSelected} />
+                        </ErrorBoundary>
+                        <ErrorBoundary>
+                            <CharInfo charId={this.state.selectedChar} />
+                        </ErrorBoundary>
                     </div>
                     <img className="vision" src={vision} alt="vision" />
                 </main>

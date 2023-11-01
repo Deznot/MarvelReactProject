@@ -15,6 +15,7 @@ class CharInfo extends Component {
     marvelService = new MarvelService();
 
     componentDidMount() {
+        this.foo.message = 0;
         this.updateChar();
     }
 
