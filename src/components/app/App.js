@@ -21,7 +21,7 @@ class App extends Component {
     onCharSelected = (id) => {
         this.setState({ selectedChar: id });
     }
-
+ 
     render() {
         return (
             <div className="app">
