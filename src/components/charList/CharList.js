@@ -6,34 +6,63 @@ import ErrorMessage from "../errorMessage/ErrorMessage";
 
 class CharList extends Component {
     state = {
-        chars: [],
+        charList: [],
         loading: true,
-        error: false
-    };
+        error: false,
+        newItemLoading: false,
+        offset: 0,
+        charEnded: false
+    }
 
-    MarvelService = new MarvelService();
+    marvelService = new MarvelService();
 
     componentDidMount() {
-        this.dataLoading();
+        this.onRequest();
     }
 
-    onCardLoaded = (chars) => {
-        this.setState({ chars, loading: false });
-    }
-
-    onError = () => {
-        this.setState({ error: true })
-    }
-
-    dataLoading = () => {
-        this.MarvelService
-            .getAllCharacters()
-            .then(this.onCardLoaded)
+    onRequest = (offset) => {
+        this.onCharListLoading();
+        this.marvelService.getAllCharacters(offset)
+            .then(this.onCharListLoaded)
             .catch(this.onError);
     }
 
-    renderCard = (chars) => {
-        chars = chars.map(char => {
+    onError = () => {
+        this.setState({
+            error: true,
+            loading: false
+        })
+    }
+
+    onCharListLoading = () => {
+        this.setState({
+            newItemLoading: true
+        })
+    }
+
+    onCharListLoaded = (newCharList) => {
+        let ended = false;
+        if (newCharList.length < 9) {
+            ended = true;
+        }
+
+        if (this.state.charList.length !== 0) {
+            if (this.state.charList[0].id === newCharList[0].id) {
+                newCharList = [];
+            }
+        }
+
+        this.setState(({offset, charList}) => ({
+            charList: [...charList, ...newCharList],
+            offset: offset + 9,
+            loading: false,
+            newItemLoading: false,
+            charEnded: ended
+        }));
+    }
+
+    renderCard = (charList) => {
+        let chars = charList.map(char => {
             const { thumbnail, name, id } = char;
             let objectFit = 'cover';
             if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
@@ -57,21 +86,27 @@ class CharList extends Component {
     }
 
     render() {
-        const { chars, loading, error } = this.state;
+        const { charList, loading, error, newItemLoading, offset } = this.state;
         const dataLoaded = loading ? <Spinner /> : null;
         const errorMessage = error ? <ErrorMessage /> : null;
-        const cards = !(loading || errorMessage) ? this.renderCard(chars) : null;
+        const cards = !(loading || errorMessage) ? this.renderCard(charList) : null;
+
         return (
             <div className="char__list">
                 {dataLoaded}
                 {cards}
                 {errorMessage}
 
-                <button className="button button__long button__main"><div className="inner">LOAD MORE</div></button>
+                <button 
+                    className="button button__long button__main"
+                    disabled={newItemLoading}
+                    onClick={() => this.onRequest(offset)}>
+                    <div className="inner">LOAD MORE</div>
+                </button>
             </div>
         );
     }
-
+   
 }
 
 
