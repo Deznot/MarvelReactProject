@@ -73,17 +73,65 @@ class CharList extends Component {
         }));
     }
 
+    cardRefs = [];
+
+    setCardRef = (elem) => {
+        this.cardRefs.push(elem);
+    }
+
+    onCardFocus = (i,id,e) => {
+        if (e.code === "Enter" || e.code === " ") {
+            this.props.onCharSelected(id)
+            //через рефы и перебор
+            // this.cardRefs.forEach(el => {
+            //     el.classList.remove('char__card-active');
+            // });
+            // this.cardRefs[i].classList.add('char__card-active');
+            // this.cardRefs[i].focus();
+        } 
+
+        if (e.target.closest('.char__grid')) {
+            switch (e.code) {
+                case 'ArrowLeft' :
+                    if (i-1 < 0) {
+                        this.cardRefs[this.cardRefs.length - 1].focus(); 
+                    } else {
+                        this.cardRefs[i - 1].focus();
+                    }
+                break;
+                case "ArrowRight" :
+                    if (i + 1 >= this.cardRefs.length) {
+                        this.cardRefs[0].focus();
+                    } else {
+                        this.cardRefs[i + 1].focus();
+                    }
+                break;
+                default : {}
+            } 
+        }
+        
+    }
+
     renderCard = (charList) => {
-        let chars = charList.map(char => {
+        let chars = charList.map((char,i) => {
             const { thumbnail, name, id } = char;
             let objectFit = 'cover';
             if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
                 objectFit = 'unset';
             }
+            const selected = id === this.props.selectedCharId?"char__card-active": null;
+            
             return (
                 <li key={id}
-                    onClick={() => this.props.onCharSelected(id)}
-                    className="char__card">
+                    onClick={() => {
+                        this.props.onCharSelected(id);
+                    }}
+                    className= {`char__card ${selected}`}
+                    ref={this.setCardRef}
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                        this.onCardFocus(i,id, e);
+                    }}>
                     <img src={thumbnail} alt={name} className="char__img" style={{ objectFit: objectFit }} />
                     <div className="char__name">{name}</div>
                 </li>

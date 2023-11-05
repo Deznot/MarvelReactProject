@@ -32,7 +32,7 @@ class App extends Component {
                     </ErrorBoundary>
                     <div className="char__wrapper">
                         <ErrorBoundary>
-                            <CharList onCharSelected={this.onCharSelected} />
+                            <CharList onCharSelected={this.onCharSelected} selectedCharId={this.state.selectedChar}/>
                         </ErrorBoundary>
                         <ErrorBoundary>
                             <CharInfo charId={this.state.selectedChar} />
