@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/MarvelReactProject/static/css/main.1fb25c30.css",
+    "main.js": "/MarvelReactProject/static/js/main.cbe9ec07.js",
+    "static/media/x-men.png": "/MarvelReactProject/static/media/x-men.41b39e1944f148b7a123.png",
+    "static/media/UW.png": "/MarvelReactProject/static/media/UW.422636b41d853d832a20.png",
+    "static/media/vision.png": "/MarvelReactProject/static/media/vision.067d4ae1936d64a577ce.png",
+    "static/media/thor.jpeg": "/MarvelReactProject/static/media/thor.533e3a5e127689ab0b1f.jpeg",
+    "static/media/mjolnir.png": "/MarvelReactProject/static/media/mjolnir.61f31e1809f12183a524.png",
+    "static/media/Avengers.png": "/MarvelReactProject/static/media/Avengers.4065c8f9c94e3d8b039a.png",
+    "static/media/error.gif": "/MarvelReactProject/static/media/error.42292aa12b6bc303ce99.gif",
+    "static/media/roboto-condensed-v27-latin-900italic.woff2": "/MarvelReactProject/static/media/roboto-condensed-v27-latin-900italic.134a05142428a8c95df3.woff2",
+    "static/media/roboto-condensed-v27-latin-600italic.woff2": "/MarvelReactProject/static/media/roboto-condensed-v27-latin-600italic.47bbb3afbdd806b6630b.woff2",
+    "static/media/roboto-condensed-v27-latin-800italic.woff2": "/MarvelReactProject/static/media/roboto-condensed-v27-latin-800italic.55fc0ccda155d9a92b55.woff2",
+    "static/media/roboto-condensed-v27-latin-700italic.woff2": "/MarvelReactProject/static/media/roboto-condensed-v27-latin-700italic.0f0cb9d54586a9dca54d.woff2",
+    "static/media/roboto-condensed-v27-latin-500italic.woff2": "/MarvelReactProject/static/media/roboto-condensed-v27-latin-500italic.426a9ae093e74d7ace08.woff2",
+    "static/media/roboto-condensed-v27-latin-italic.woff2": "/MarvelReactProject/static/media/roboto-condensed-v27-latin-italic.cad3991e75fd19ae7368.woff2",
+    "static/media/roboto-condensed-v27-latin-800.woff2": "/MarvelReactProject/static/media/roboto-condensed-v27-latin-800.b32959c99f61f674f149.woff2",
+    "static/media/roboto-condensed-v27-latin-600.woff2": "/MarvelReactProject/static/media/roboto-condensed-v27-latin-600.e6712ca1c808df09aa31.woff2",
+    "static/media/roboto-condensed-v27-latin-700.woff2": "/MarvelReactProject/static/media/roboto-condensed-v27-latin-700.0d130fb6e460ef3998f8.woff2",
+    "static/media/roboto-condensed-v27-latin-500.woff2": "/MarvelReactProject/static/media/roboto-condensed-v27-latin-500.cc205b8c483f770e2920.woff2",
+    "static/media/roboto-condensed-v27-latin-900.woff2": "/MarvelReactProject/static/media/roboto-condensed-v27-latin-900.b483ed0b388332764de1.woff2",
+    "static/media/roboto-condensed-v27-latin-regular.woff2": "/MarvelReactProject/static/media/roboto-condensed-v27-latin-regular.dc3ae5ab1518eb2bbce7.woff2",
+    "static/media/Avengers_logo.png": "/MarvelReactProject/static/media/Avengers_logo.9eaf219344d83362e830.png",
+    "index.html": "/MarvelReactProject/index.html",
+    "main.1fb25c30.css.map": "/MarvelReactProject/static/css/main.1fb25c30.css.map",
+    "main.cbe9ec07.js.map": "/MarvelReactProject/static/js/main.cbe9ec07.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1fb25c30.css",
+    "static/js/main.cbe9ec07.js"
+  ]
+}
