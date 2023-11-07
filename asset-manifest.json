@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/MarvelReactProject/static/css/main.e8c5ebec.css",
+    "main.css": "/MarvelReactProject/static/css/main.333e31a9.css",
     "main.js": "/MarvelReactProject/static/js/main.cbe9ec07.js",
     "static/media/x-men.png": "/MarvelReactProject/static/media/x-men.41b39e1944f148b7a123.png",
     "static/media/UW.png": "/MarvelReactProject/static/media/UW.422636b41d853d832a20.png",
@@ -23,11 +23,11 @@
     "static/media/roboto-condensed-v27-latin-regular.woff2": "/MarvelReactProject/static/media/roboto-condensed-v27-latin-regular.dc3ae5ab1518eb2bbce7.woff2",
     "static/media/Avengers_logo.png": "/MarvelReactProject/static/media/Avengers_logo.9eaf219344d83362e830.png",
     "index.html": "/MarvelReactProject/index.html",
-    "main.e8c5ebec.css.map": "/MarvelReactProject/static/css/main.e8c5ebec.css.map",
+    "main.333e31a9.css.map": "/MarvelReactProject/static/css/main.333e31a9.css.map",
     "main.cbe9ec07.js.map": "/MarvelReactProject/static/js/main.cbe9ec07.js.map"
   },
   "entrypoints": [
-    "static/css/main.e8c5ebec.css",
+    "static/css/main.333e31a9.css",
     "static/js/main.cbe9ec07.js"
   ]
 }
