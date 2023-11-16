@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { useState } from "react";
 import "../../style/variables.scss";
 import "../../style/style.scss";
 import AppHeader from "../appHeader/AppHeader";
@@ -13,36 +13,32 @@ import SelectChar from "../selectChar/SelectChar";
 import CharAbout from "../charAbout/CharAbout";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 
-class App extends Component {
-    state = {
-        selectedChar: null
-    }
+const App = () => {
+    const [selectedChar, setSelectedChar] = useState(null);
 
-    onCharSelected = (id) => {
-        this.setState({ selectedChar: id });
+    const onCharSelected = (id) => {
+        setSelectedChar(id);
     }
  
-    render() {
-        return (
-            <div className="app">
-                <AppHeader />
-                <main>
+    return (
+        <div className="app">
+            <AppHeader />
+            <main>
+                <ErrorBoundary>
+                    <RandomChar />
+                </ErrorBoundary>
+                <div className="char__wrapper">
                     <ErrorBoundary>
-                        <RandomChar />
+                        <CharList onCharSelected={onCharSelected} selectedCharId={selectedChar}/>
                     </ErrorBoundary>
-                    <div className="char__wrapper">
-                        <ErrorBoundary>
-                            <CharList onCharSelected={this.onCharSelected} selectedCharId={this.state.selectedChar}/>
-                        </ErrorBoundary>
-                        <ErrorBoundary>
-                            <CharInfo charId={this.state.selectedChar} />
-                        </ErrorBoundary>
-                    </div>
-                    <img className="vision" src={vision} alt="vision" />
-                </main>
-            </div>
-        )
-    }
+                    <ErrorBoundary>
+                        <CharInfo charId={selectedChar} />
+                    </ErrorBoundary>
+                </div>
+                <img className="vision" src={vision} alt="vision" />
+            </main>
+        </div>
+    );
 }
 
 export default App;
