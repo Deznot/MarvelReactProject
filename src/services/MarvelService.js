@@ -1,29 +1,22 @@
-class MarvelService {
-    _apiBase = 'https://gateway.marvel.com:443/v1/public/';
-    _apiKey = "apikey=d24cd74b8f784e74321942586e80d036";
-    _apiCharOffset = 0;
+import useHttp from "../components/hooks/http.hooks";
 
-    getResource = async (url) => {
-        let res = await fetch(url);
+const MarvelService = () => {
+    const _apiBase = 'https://gateway.marvel.com:443/v1/public/';
+    const _apiKey = "apikey=d24cd74b8f784e74321942586e80d036";
+    const _apiCharOffset = 0;
+    const [loading, request, error, clearError] = useHttp();
 
-        if (!res.ok) {
-            throw new Error (`Could not fetch ${url}, status: ${res.status}`);
-        }
-
-        return await res.json();
+    const getAllCharacters = async (charOffset = _apiCharOffset) => {
+        const res = await request(`${_apiBase}characters?limit=9&offset=${charOffset}&${_apiKey}`);
+        return res.data.results.map(_transformCharacterData);
     }
 
-    getAllCharacters = async (charOffset = this._apiCharOffset) => {
-        const res = await this.getResource(`${this._apiBase}characters?limit=9&offset=${charOffset}&${this._apiKey}`);
-        return res.data.results.map(this._transformCharacterData);
+    const getCharacter = async (id) => {
+        let res = await request(`${_apiBase}/characters/${id}?${_apiKey}`);
+        return _transformCharacterData(res.data.results[0]);
     }
 
-    getCharacter = async (id) => {
-        let res = await this.getResource(`${this._apiBase}/characters/${id}?${this._apiKey}`);
-        return this._transformCharacterData(res.data.results[0]);
-    }
-
-    _transformCharacterData = (char) => {
+    const _transformCharacterData = (char) => {
         return {
             id: char.id,
             name: char.name,
@@ -33,6 +26,15 @@ class MarvelService {
             wiki: char.urls[1].url,
             comics: char.comics.items
         }
+    }
+
+    return {
+        loading,
+        request,
+        error,
+        clearError,
+        getAllCharacters,
+        getCharacter
     }
 }
 
