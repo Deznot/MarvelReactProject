@@ -8,7 +8,7 @@ import SelectChar from "../selectChar/SelectChar";
 
 const CharInfo = (props) => {
     const [char, setChar] = useState(null);
-    const { loading, getCharacter, error } = useMarvelService();
+    const { loading, getCharacter, error, clearError } = useMarvelService();
 
     useEffect(() => {
         updateChar();
@@ -21,6 +21,8 @@ const CharInfo = (props) => {
     const updateChar = () => {
         const { charId } = props;
         if (!charId) return;
+
+        clearError();
 
         getCharacter(charId)
             .then(onCharLoaded);

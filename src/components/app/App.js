@@ -19,7 +19,7 @@ const App = () => {
     const onCharSelected = (id) => {
         setSelectedChar(id);
     }
- 
+
     return (
         <div className="app">
             <AppHeader />
@@ -29,7 +29,7 @@ const App = () => {
                 </ErrorBoundary>
                 <div className="char__wrapper">
                     <ErrorBoundary>
-                        <CharList onCharSelected={onCharSelected} selectedCharId={selectedChar}/>
+                        <CharList onCharSelected={onCharSelected} selectedCharId={selectedChar} />
                     </ErrorBoundary>
                     <ErrorBoundary>
                         <CharInfo charId={selectedChar} />
