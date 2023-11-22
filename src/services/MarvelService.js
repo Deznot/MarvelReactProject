@@ -1,10 +1,10 @@
 import useHttp from "../components/hooks/http.hooks";
 
-const MarvelService = () => {
+const useMarvelService = () => {
     const _apiBase = 'https://gateway.marvel.com:443/v1/public/';
     const _apiKey = "apikey=d24cd74b8f784e74321942586e80d036";
     const _apiCharOffset = 0;
-    const [loading, request, error, clearError] = useHttp();
+    const { loading, request, error, clearError } = useHttp();
 
     const getAllCharacters = async (charOffset = _apiCharOffset) => {
         const res = await request(`${_apiBase}characters?limit=9&offset=${charOffset}&${_apiKey}`);
@@ -38,4 +38,4 @@ const MarvelService = () => {
     }
 }
 
-export default MarvelService;
+export default useMarvelService;

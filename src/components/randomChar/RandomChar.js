@@ -1,73 +1,57 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./randomChar.scss";
 import mjolnir from '../../resources/img/mjolnir.png';
 import "../../style/button.scss";
-import MarvelService from "../../services/MarvelService";
+import useMarvelService from "../../services/MarvelService";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 
 const RandomChar = (props) => {
-    const [char,setChar] = useState({});
-    const [loading,setLoading] = useState(true);
-    const [error, setError] = useState(false);
-
-    const marvelService = new MarvelService();
+    const [char, setChar] = useState({});
+    const { loading, error, getCharacter, clearError } = useMarvelService();
 
     useEffect(() => {
         updateChar();
-    },[])
-
-    const onError = () => {
-        setError(true);
-        setLoading(false);
-    }
+    }, []);
 
     const onCharLoaded = (char) => {
         setChar(char);
-        setLoading(false);
     };
-
-    const onCharLoading = () => {
-        setLoading(true);
-    }
 
     const updateChar = async () => {
         const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
-        onCharLoading();
-        marvelService
-            .getCharacter(id)
-            .then(onCharLoaded)
-            .catch(onError);
+        getCharacter(id)
+            .then(onCharLoaded);
     }
 
     const onClickButtonTry = () => {
         return updateChar();
     }
 
-        const errorMessage = error ? <ErrorMessage /> : null;
-        const spinner = loading ? <Spinner /> : null;
-        const content = !(loading || errorMessage) ? <View char={char} /> : null;
+    const errorMessage = error ? <ErrorMessage /> : null;
+    const spinner = loading ? <Spinner /> : null;
+    const content = !(loading || errorMessage || !char) ? <View char={char} /> : null;
 
-        return (
-            <div className="randomChar">
-                {errorMessage}
-                {spinner}
-                {content}
-                <div className="randomChar__another">
-                    <p className="randomChar__title">
-                        Random character for today!<br />
-                        Do you want to get to know him better?
-                    </p>
-                    <p className="randomChar__title">
-                        Or choose another one
-                    </p>
-                    <button onClick={onClickButtonTry} className="button button__main">
-                        <div className="inner">TRY IT</div>
-                    </button>
-                    <img src={mjolnir} alt="random character decoration" className="randomChar__decoration" />
-                </div>
+    return (
+        <div className="randomChar">
+            {errorMessage}
+            {spinner}
+            {content}
+            <div className="randomChar__another">
+                <p className="randomChar__title">
+                    Random character for today!<br />
+                    Do you want to get to know him better?
+                </p>
+                <p className="randomChar__title">
+                    Or choose another one
+                </p>
+                <button onClick={onClickButtonTry} className="button button__main">
+                    <div className="inner">TRY IT</div>
+                </button>
+                <img src={mjolnir} alt="random character decoration" className="randomChar__decoration" />
             </div>
-        );
+        </div>
+    );
 };
 
 const View = ({ char }) => {
