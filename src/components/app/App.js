@@ -15,17 +15,26 @@ import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 
 const App = () => {
     const [selectedChar, setSelectedChar] = useState(null);
+    const [selectedComics, setSelectedComics] = useState(null);
 
     const onCharSelected = (id) => {
         setSelectedChar(id);
     }
 
+    const onComicsSelected = (id) => {
+        setSelectedComics(id);
+    }
+
     return (
         <div className="app">
-            <AppHeader />
+            {/* <AppHeader /> */}
+            <AppBanner />
             <main>
                 <ErrorBoundary>
-                    <ComicsList />
+                    <ComicsList onComicsSelected={onComicsSelected} />
+                </ErrorBoundary>
+                <ErrorBoundary>
+                    <SingleComics selectedComics={selectedComics} />
                 </ErrorBoundary>
                 {/* <ErrorBoundary>
                     <RandomChar />

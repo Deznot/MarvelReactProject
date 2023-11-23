@@ -1,23 +1,60 @@
 import "./singleComics.scss";
-import single from "../../resources/img/x-men.png"
+import { useEffect, useState } from "react";
+import useMarvelService from "../../services/MarvelService";
+import ErrorMessage from "../errorMessage/ErrorMessage";
+import Spinner from "../spinner/Spinner";
 
-const SingleComics = () => {
+const SingleComics = (props) => {
+    const [comics, setComics] = useState([]);
+    const { loading, getComics, error } = useMarvelService();
+
+    useEffect(() => {
+        onRequest(props.selectedComics);
+    }, [props.selectedComics]);
+
+    const onRequest = (id) => {
+        const { selectedComics } = props;
+        if (!selectedComics) return;
+        getComics(id)
+            .then(onComicsLoaded);
+    }
+
+    const onComicsLoaded = (comics) => {
+        setComics(comics);
+    }
+
+    const renderComics = (newComics) => {
+        if (newComics.length === 0) return;
+        const { title, description, pageCount, thumbnail, language, price } = newComics;
+        const objectFit = thumbnail === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg" ? "unset" : "cover";
+
+        return (
+            <>
+                <img src={thumbnail} alt={title} className="singleComics__img" style={{ objectFit: objectFit }} />
+                <div className="singleComics__info">
+                    <p className="singleComics__title">{title}</p>
+                    <p className="singleComics__descr">
+                        {description}
+                    </p>
+                    <p className="singleComics__pages">{pageCount}</p>
+                    <p className="singleComics__lang">{language}</p>
+                    <p className="singleComics__price">{price}</p>
+                </div>
+                <a href="#" className="singleComics__back">Back to all</a>
+            </>
+        );
+    }
+
+    const singleComics = renderComics(comics);
+    const errorMessage = error ? <ErrorMessage /> : null;
+    const spinner = loading ? <Spinner /> : null;
+    const content = !(loading || errorMessage) ? singleComics : null;
 
     return (
         <div className="singleComics">
-            <img src={single} alt="Comics" className="singleComics__img" />
-            <div className="singleComics__info">
-                <p className="singleComics__title">X-Men: Days of Future Past</p>
-                <p className="singleComics__descr">
-                    Re-live the legendary first journey into the dystopian future of 2013 - where Sentinels stalk the Earth, 
-                    and the X-Men are humanity's only hope...until they die! Also featuring the first appearance of Alpha Flight, the return of the Wendigo, 
-                    the history of the X-Men from Cyclops himself...and a demon for Christmas!?
-                </p>
-                <p className="singleComics__pages">144 pages</p>
-                <p className="singleComics__lang">Language: en-us</p>
-                <p className="singleComics__price">9.99$</p>
-            </div>
-            <a href="#" className="singleComics__back">Back to all</a>
+            {errorMessage}
+            {spinner}
+            {content}
         </div>
     );
 };
