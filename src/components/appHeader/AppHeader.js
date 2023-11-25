@@ -20,7 +20,7 @@ const AppHeader = (props) => {
                                 className="header__link"
                                 end
                                 to="/"
-                                styles={({ isActive }) => ({ color: isActive ? "#9F0013" : "inherit" })}
+                                style={({ isActive }) => ({ color: isActive ? "#9F0013" : "inherit" })}
                             >
                                 <span>Characters</span>
                             </NavLink>
@@ -30,7 +30,7 @@ const AppHeader = (props) => {
                             <NavLink
                                 end
                                 className="header__link"
-                                styles={({ isActive }) => ({ color: isActive ? "#9F0013" : "inherit" })}
+                                style={({ isActive }) => ({ color: isActive ? "#9F0013" : "inherit" })}
                                 to="/comics"
                             >
                                 Comics

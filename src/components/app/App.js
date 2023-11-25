@@ -14,7 +14,7 @@ const App = () => {
                 <main>
                     <Routes>
                         <Route path="/" element={<MainPage />} />
-                        <Route path="/singleComics" element={<ComicsPage />} />
+                        <Route path="/comics" element={<ComicsPage />} />
                     </Routes>
                     <img className="vision" src={vision} alt="vision" />
                 </main>
