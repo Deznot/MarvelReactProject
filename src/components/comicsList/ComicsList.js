@@ -1,5 +1,4 @@
 import "./comicsList.scss";
-import comics from "../../resources/img/UW.png"
 import useMarvelService from "../../services/MarvelService";
 import { useState, useEffect } from "react";
 import Spinner from "../spinner/Spinner";

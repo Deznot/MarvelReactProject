@@ -1,0 +1,15 @@
+import ErrorMessage from "../../errorMessage/ErrorMessage";
+import "./page404.scss";
+import { Link } from "react-router-dom";
+
+const Page404 = () => {
+    return (
+        <div>
+            <ErrorMessage />
+            <p className="p-404">Page doesn't exist</p>
+            <Link to="/" className="link-404" >Back to main page</Link>
+        </div>
+    );
+}
+
+export default Page404;
