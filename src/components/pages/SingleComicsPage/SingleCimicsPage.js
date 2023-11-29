@@ -5,12 +5,10 @@ import ErrorMessage from "../../errorMessage/ErrorMessage";
 import Spinner from "../../spinner/Spinner";
 import { Link, useParams } from "react-router-dom";
 
-
 const SingleComicsPage = () => {
     const [comics, setComics] = useState([]);
     const { loading, getComics, error, clearError } = useMarvelService();
     const { comicsId } = useParams();
-    console.log(comicsId);
 
     useEffect(() => {
         onRequest(comicsId);
@@ -51,7 +49,7 @@ const SingleComicsPage = () => {
     const singleComics = renderComics(comics);
     const errorMessage = error ? <ErrorMessage /> : null;
     const spinner = loading ? <Spinner /> : null;
-    const content = !(loading || errorMessage ||!comics) ? singleComics : null;
+    const content = !(loading || errorMessage || !comics) ? singleComics : null;
 
     return (
         <div className="singleComics">

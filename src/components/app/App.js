@@ -15,11 +15,15 @@ const App = () => {
                 <main>
                     <Routes>
                         <Route path="/" element={<MainPage />} />
-                        <Route path="comics" element={<ComicsPage />}>
-                            {/* <Route path=':comicsId' element={<SingleComicsPage/>} /> */}
+                        <Route path="comics">
+                            <Route path="/comics" element={<ComicsPage />} />
+                            <Route path=':comicsId' element={<SingleComicsPage />} />
                         </Route>
-                        <Route path='/comics/:comicsId' element={<SingleComicsPage/>}/>
-                        <Route path="*" element={<Page404 />}/>
+                        {/* <Route path="comics" element={<ComicsPage />}>
+                            <Route path=':comicsId' element={<SingleComicsPage />} />
+                        </Route>
+                        <Route path='comics/:comicsId' element={<SingleComicsPage />} /> */}
+                        <Route path="*" element={<Page404 />} />
                     </Routes>
                     <img className="vision" src={vision} alt="vision" />
                 </main>

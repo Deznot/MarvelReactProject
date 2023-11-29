@@ -3,8 +3,9 @@ import useMarvelService from "../../services/MarvelService";
 import { useState, useEffect } from "react";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
+import { Link } from "react-router-dom";
 
-const ComicsList = (props) => {
+const ComicsList = () => {
     const [comics, setComics] = useState([]);
     const [offset, setOffset] = useState(0);
     const [comicsEnded, setComicsEnded] = useState(false);
@@ -37,8 +38,8 @@ const ComicsList = (props) => {
         let comList = comicsList.map((item, i) => {
             const objectFit = (item.thumbnail === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg") ? "unset" : "cover";
             return (
-                <li key={item.id + i} onClick={() => props.onComicsSelected(item.id)} className="comics__item">
-                    <a href="#">
+                <li key={item.id + i} className="comics__item">
+                    <Link to={`${item.id}`}>
                         <img className="comics__item-img" src={item.thumbnail} alt={item.title} style={{ objectFit: objectFit }} />
                         <div className="comics__item-title">
                             {item.title}
@@ -46,7 +47,7 @@ const ComicsList = (props) => {
                         <div className="comics__item-price">
                             {item.price}
                         </div>
-                    </a>
+                    </Link>
                 </li>
             );
         });

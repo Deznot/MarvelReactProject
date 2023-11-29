@@ -4,6 +4,13 @@ import useMarvelService from "../../services/MarvelService";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 import Spinner from "../spinner/Spinner";
 
+//SingleComics via lift state without rooting
+/*
+include into method where the lift is needed
+const [selectedComics, setSelectedComics] = useState(null);
+const onComicsSelected = (id) => {
+    setSelectedComics(id);
+}*/
 const SingleComics = (props) => {
     const [comics, setComics] = useState([]);
     const { loading, getComics, error } = useMarvelService();
