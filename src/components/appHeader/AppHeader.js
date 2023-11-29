@@ -28,7 +28,7 @@ const AppHeader = (props) => {
                         /
                         <li className="header__menu-item">
                             <NavLink
-                                end
+                                // end
                                 className="header__link"
                                 style={({ isActive }) => ({ color: isActive ? "#9F0013" : "inherit" })}
                                 to="/comics"
