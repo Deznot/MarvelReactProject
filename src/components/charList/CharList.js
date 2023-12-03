@@ -4,6 +4,7 @@ import "./charList.scss";
 import useMarvelService from "../../services/MarvelService";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 const CharList = (props) => {
     const [charList, setCharList] = useState([]);
@@ -91,25 +92,33 @@ const CharList = (props) => {
             const selected = id === props.selectedCharId ? "char__card-active" : null;
 
             return (
-                <li key={id}
-                    onClick={() => {
-                        props.onCharSelected(id);
-                    }}
-                    className={`char__card ${selected}`}
-                    ref={(el) => cardRefs.current[i] = el}
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                        onCardFocus(i, id, e);
-                    }}>
-                    <img src={thumbnail} alt={name} className="char__img" style={{ objectFit: objectFit }} />
-                    <div className="char__name">{name}</div>
-                </li>
+                <CSSTransition
+                    key={id}
+                    classNames="char__card"
+                    timeout={500}
+                >
+                    <li key={id}
+                        onClick={() => {
+                            props.onCharSelected(id);
+                        }}
+                        className={`char__card ${selected}`}
+                        ref={(el) => cardRefs.current[i] = el}
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                            onCardFocus(i, id, e);
+                        }}>
+                        <img src={thumbnail} alt={name} className="char__img" style={{ objectFit: objectFit }} />
+                        <div className="char__name">{name}</div>
+                    </li>
+                </CSSTransition>
             );
         });
 
         return (
             <ul className="char__grid">
-                {chars}
+                <TransitionGroup component={null}>
+                    {chars}
+                </TransitionGroup>
             </ul>
         )
     }
