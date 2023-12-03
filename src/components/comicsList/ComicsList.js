@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 import { Link } from "react-router-dom";
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 const ComicsList = () => {
     const [comics, setComics] = useState([]);
@@ -38,23 +39,31 @@ const ComicsList = () => {
         let comList = comicsList.map((item, i) => {
             const objectFit = (item.thumbnail === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg") ? "unset" : "cover";
             return (
-                <li key={item.id + i} className="comics__item">
-                    <Link to={`${item.id}`}>
-                        <img className="comics__item-img" src={item.thumbnail} alt={item.title} style={{ objectFit: objectFit }} />
-                        <div className="comics__item-title">
-                            {item.title}
-                        </div>
-                        <div className="comics__item-price">
-                            {item.price}
-                        </div>
-                    </Link>
-                </li>
+                <CSSTransition 
+                    classNames="comics__item"
+                    key={item.id + i}
+                    timeout={500}
+                >
+                    <li key={item.id + i} className="comics__item">
+                        <Link to={`${item.id}`}>
+                            <img className="comics__item-img" src={item.thumbnail} alt={item.title} style={{ objectFit: objectFit }} />
+                            <div className="comics__item-title">
+                                {item.title}
+                            </div>
+                            <div className="comics__item-price">
+                                {item.price}
+                            </div>
+                        </Link>
+                    </li>
+                </CSSTransition>
             );
         });
 
         return (
             <ul className="comics__grid">
-                {comList}
+                <TransitionGroup component={null}>
+                    {comList}
+                </TransitionGroup>
             </ul>
         );
     }
@@ -73,7 +82,7 @@ const ComicsList = () => {
                 style={{ 'display': comicsEnded ? 'none' : 'block' }}
                 className="button button__main button__long"
                 onClick={() => onRequest(offset)}>
-                <div className="inner">load more</div>
+                <div className="inner">LOAD MORE</div>
             </button>
         </div>
     );
