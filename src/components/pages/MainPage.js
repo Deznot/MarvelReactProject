@@ -3,6 +3,7 @@ import RandomChar from "../randomChar/RandomChar";
 import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
+import FindCharacter from "../findCharacter/FindCharacter";
 
 
 const MainPage = () => {
@@ -22,6 +23,9 @@ const MainPage = () => {
                 </ErrorBoundary>
                 <ErrorBoundary>
                     <CharInfo charId={selectedChar} />
+                </ErrorBoundary>
+                <ErrorBoundary>
+                    <FindCharacter />
                 </ErrorBoundary>
             </div>
         </>
