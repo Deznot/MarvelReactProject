@@ -1,34 +1,39 @@
-import "./singleComicsPage.scss";
+import "./CommonSinglePage.scss";
 import { useEffect, useState } from "react";
 import useMarvelService from "../../../services/MarvelService";
 import ErrorMessage from "../../errorMessage/ErrorMessage";
 import Spinner from "../../spinner/Spinner";
 import { Link, useParams } from "react-router-dom";
 
-const SingleComicsPage = () => {
-    const [comics, setComics] = useState([]);
-    const { loading, getComics, error, clearError } = useMarvelService();
-    const { comicsId } = useParams();
+const CommonSinglePage = ({Component, dataType}) => {
+    const [data, setData] = useState([]);
+    const { loading, error, clearError, getComics, getCharacter } = useMarvelService();
+    const { id } = useParams();
 
     useEffect(() => {
-        onRequest(comicsId);
-    }, [comicsId]);
+        onRequest(id);
+    }, [id]);
 
     const onRequest = (id) => {
         clearError();
-        getComics(id)
-            .then(onComicsLoaded);
+
+        switch (dataType) {
+            case "comics":
+                getComics(id)
+                .then(onDataLoaded);
+                break;
+            case "character":
+                getCharacter(id)
+                .then(onDataLoaded);
+            break;
+        }
     }
 
-    const onComicsLoaded = (comics) => {
-        setComics(comics);
+    const onDataLoaded = (data) => {
+        setData(data);
     }
 
-    const renderComics = (newComics) => {
-        if (newComics.length === 0) return;
-        const { title, description, pageCount, thumbnail, language, price } = newComics;
-        const objectFit = thumbnail === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg" ? "unset" : "cover";
-
+    const renderComics = () => {
         return (
             <>
                 <img src={thumbnail} alt={title} className="singleComics__img" style={{ objectFit: objectFit }} />
@@ -60,4 +65,4 @@ const SingleComicsPage = () => {
     );
 };
 
-export default SingleComicsPage;
+export default CommonSinglePage;

@@ -11,7 +11,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 const Page404 = lazy(() => import('../pages/404/Page404'));
 const MainPage = lazy(() => import('../pages/MainPage'));
 const ComicsPage = lazy(() => import('../pages/ComicsPage'));
-const SingleComicsPage = lazy(() => import('../pages/SingleComicsPage/SingleCimicsPage'));
+// const SingleComicsPage = lazy(() => import('../pages/SingleComicsLayout/SingleComicsLayout'));
 
 const App = () => {
     return (
@@ -24,8 +24,9 @@ const App = () => {
                             <Route path="/" element={<MainPage />} />
                             <Route path="comics">
                                 <Route path="/comics" element={<ComicsPage />} />
-                                <Route path=':comicsId' element={<SingleComicsPage />} />
+                                {/* <Route path=':comicsId' element={<SingleComicsPage />} /> */}
                             </Route>
+                            <Route path="character/:id" /*element={}*/ />
                             <Route path="*" element={<Page404 />} />
                         </Routes>
                         <img className="vision" src={vision} alt="vision" />
