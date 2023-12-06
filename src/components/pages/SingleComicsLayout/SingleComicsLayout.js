@@ -1,13 +1,20 @@
 import "./singleComicsLayout.scss";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
-const SingleComicsLayout = ({data}) => {
+const SingleComicsLayout = ({ data }) => {
 
     const { title, description, pageCount, thumbnail, language, price } = data;
     const objectFit = thumbnail === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg" ? "unset" : "cover";
 
     return (
         <div className="singleComics">
+            <Helmet>
+                <meta
+                    name={`${title}`}
+                    content={`${title} comics book`} />
+                <title>{title}</title>
+            </Helmet>
             <img src={thumbnail} alt={title} className="singleComics__img" style={{ objectFit: objectFit }} />
             <div className="singleComics__info">
                 <p className="singleComics__title">{title}</p>

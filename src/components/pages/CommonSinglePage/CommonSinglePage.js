@@ -26,6 +26,7 @@ const CommonSinglePage = ({ Component, dataType }) => {
                 getCharacter(id)
                     .then(onDataLoaded);
                 break;
+            default:
         }
     }
 
