@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import useMarvelService from "../../../services/MarvelService";
 import ErrorMessage from "../../errorMessage/ErrorMessage";
 import Spinner from "../../spinner/Spinner";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const CommonSinglePage = ({Component, dataType}) => {
+const CommonSinglePage = ({ Component, dataType }) => {
     const [data, setData] = useState([]);
     const { loading, error, clearError, getComics, getCharacter } = useMarvelService();
     const { id } = useParams();
@@ -20,12 +20,12 @@ const CommonSinglePage = ({Component, dataType}) => {
         switch (dataType) {
             case "comics":
                 getComics(id)
-                .then(onDataLoaded);
+                    .then(onDataLoaded);
                 break;
             case "character":
                 getCharacter(id)
-                .then(onDataLoaded);
-            break;
+                    .then(onDataLoaded);
+                break;
         }
     }
 
@@ -33,35 +33,17 @@ const CommonSinglePage = ({Component, dataType}) => {
         setData(data);
     }
 
-    const renderComics = () => {
-        return (
-            <>
-                <img src={thumbnail} alt={title} className="singleComics__img" style={{ objectFit: objectFit }} />
-                <div className="singleComics__info">
-                    <p className="singleComics__title">{title}</p>
-                    <p className="singleComics__descr">
-                        {description}
-                    </p>
-                    <p className="singleComics__pages">{pageCount}</p>
-                    <p className="singleComics__lang">{language}</p>
-                    <p className="singleComics__price">{price}</p>
-                </div>
-                <Link to={'/comics'} className="singleComics__back">Back to all</Link>
-            </>
-        );
-    }
-
-    const singleComics = renderComics(comics);
+    const renderData = data ? <Component data={data} /> : null;
     const errorMessage = error ? <ErrorMessage /> : null;
     const spinner = loading ? <Spinner /> : null;
-    const content = !(loading || errorMessage || !comics) ? singleComics : null;
+    const content = !(loading || errorMessage || !data) ? renderData : null;
 
     return (
-        <div className="singleComics">
+        <>
             {errorMessage}
             {spinner}
             {content}
-        </div>
+        </>
     );
 };
 

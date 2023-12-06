@@ -11,7 +11,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 const Page404 = lazy(() => import('../pages/404/Page404'));
 const MainPage = lazy(() => import('../pages/MainPage'));
 const ComicsPage = lazy(() => import('../pages/ComicsPage'));
-// const SingleComicsPage = lazy(() => import('../pages/SingleComicsLayout/SingleComicsLayout'));
+const SingleComicsLayout = lazy(() => import('../pages/SingleComicsLayout/SingleComicsLayout'));
+const SingleCharacterLayout = lazy(() => import('../pages/SingleCharacterLayout/SingleCharacterLayout'));
+const CommonSinglePage = lazy(() => import('../pages/CommonSinglePage/CommonSinglePage'));
 
 const App = () => {
     return (
@@ -24,9 +26,9 @@ const App = () => {
                             <Route path="/" element={<MainPage />} />
                             <Route path="comics">
                                 <Route path="/comics" element={<ComicsPage />} />
-                                {/* <Route path=':comicsId' element={<SingleComicsPage />} /> */}
+                                <Route path=':id' element={<CommonSinglePage Component={SingleComicsLayout} dataType={'comics'} />} />
                             </Route>
-                            <Route path="character/:id" /*element={}*/ />
+                            <Route path="character/:id" element={<CommonSinglePage Component={SingleCharacterLayout} dataType={'character'} />} />
                             <Route path="*" element={<Page404 />} />
                         </Routes>
                         <img className="vision" src={vision} alt="vision" />
