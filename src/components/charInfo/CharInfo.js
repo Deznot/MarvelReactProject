@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./charInfo.scss";
-import ErrorMessage from "../errorMessage/ErrorMessage";
-import Spinner from "../spinner/Spinner";
 import useMarvelService from "../../services/MarvelService";
-import SelectChar from "../selectChar/SelectChar";
+import setContent from "../../utils/setContent";
 
 const CharInfo = (props) => {
     const [char, setChar] = useState(null);
-    const { loading, getCharacter, error, clearError } = useMarvelService();
+    const { getCharacter, clearError, process, setProcess } = useMarvelService();
 
     useEffect(() => {
         updateChar();
@@ -25,27 +23,20 @@ const CharInfo = (props) => {
         clearError();
 
         getCharacter(charId)
-            .then(onCharLoaded);
+            .then(onCharLoaded)
+            .then(() => setProcess('loaded'));
     }
-
-    const selectChar = char || loading || error ? null : <SelectChar />;
-    const errorMessage = error ? <ErrorMessage /> : null;
-    const spinner = loading ? <Spinner /> : null;
-    const content = !(loading || errorMessage || !char) ? <View char={char} /> : null;
 
     return (
         <div className="char__info">
-            {selectChar}
-            {errorMessage}
-            {spinner}
-            {content}
+            {setContent(process, View, char)}
         </div>
     );
 
 };
 
-const View = ({ char }) => {
-    const { name, description, thumbnail, homepage, wiki, comics } = char;
+const View = ({ data }) => {
+    const { name, description, thumbnail, homepage, wiki, comics } = data;
     const comicsListHandler = (comics) => {
         const maxList = 10;
         let comicsRes = comics.map((item, i) => {

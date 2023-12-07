@@ -6,13 +6,28 @@ import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
+const setContent = ( process, Component, newItemLoading) => {
+    switch(process){
+        case "waiting":
+            return <Spinner />;
+        case "loading":
+            return newItemLoading? <Component/> : <Spinner/>;
+        case "loaded":
+            return <Component/>
+        case "error" :
+            return <ErrorMessage/>
+        default :
+            throw new Error('Unexpected process');
+    }
+}
+
 const CharList = (props) => {
     const [charList, setCharList] = useState([]);
     const [newItemLoading, setNewItemLoading] = useState(false);
     const [offset, setOffset] = useState(0);
     const [charEnded, setCharEnded] = useState(false);
 
-    const { loading, getAllCharacters, error, clearError } = useMarvelService();
+    const { loading, getAllCharacters, error, clearError, process, setProcess } = useMarvelService();
 
     useEffect(() => {
         onRequest(offset, true);
@@ -31,7 +46,8 @@ const CharList = (props) => {
     const onRequest = (offset, initial) => {
         initial ? setNewItemLoading(false) : setNewItemLoading(true);
         getAllCharacters(offset)
-            .then(onCharListLoaded);
+            .then(onCharListLoaded)
+            .then(() => setProcess("loaded"))
     }
 
     const onCharListLoaded = (newCharList) => {
@@ -124,15 +140,13 @@ const CharList = (props) => {
     }
 
 
-    const dataLoaded = loading && !newItemLoading ? <Spinner /> : null;
-    const errorMessage = error ? <ErrorMessage /> : null;
-    const cards = renderCard(charList);
+    // const dataLoaded = loading && !newItemLoading ? <Spinner /> : null;
+    // const errorMessage = error ? <ErrorMessage /> : null;
+    // const cards = renderCard(charList);
 
     return (
         <div className="char__list">
-            {dataLoaded}
-            {cards}
-            {errorMessage}
+            {setContent(process, ()=>renderCard(charList), newItemLoading)}
             <button
                 className="button button__long button__main"
                 disabled={newItemLoading}
