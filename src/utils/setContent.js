@@ -1,19 +1,18 @@
 import Spinner from "../components/spinner/Spinner";
 import ErrorMessage from "../components/errorMessage/ErrorMessage";
-import SelectChar from "../components/selectChar/SelectChar";
 
-const setContent = ( process, Component, data ) => {
+const setContent = ({ process, Component, data, WaitingComponent, waitingData = null, LoadingComponent = true }) => {
 
-    switch(process){
+    switch (process) {
         case "waiting":
-            return <SelectChar />;
+            return WaitingComponent ? <WaitingComponent data={waitingData} /> : null;
         case "loading":
-            return <Spinner />;
+            return LoadingComponent ? <Spinner /> : null;
         case "loaded":
-            return <Component data={data}/>
-        case "error" :
-            return <ErrorMessage/>
-        default :
+            return <Component data={data} />
+        case "error":
+            return <ErrorMessage />
+        default:
             throw new Error('Unexpected process');
     }
 }

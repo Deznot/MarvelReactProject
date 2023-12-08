@@ -10,6 +10,7 @@
             z-index: 5;
             background-color: #fff;
         }
+
         &-label {
             display: block;
             font-weight: bold;
@@ -17,11 +18,13 @@
             line-height: 24px;
             color: #000;
         }
+
         &-wrapper {
             margin-top: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+
             input {
                 padding: 0 10px;
                 width: 250px;
@@ -32,6 +35,7 @@
                 font-size: 14px;
             }
         }
+
         &-error {
             margin-top: 25px;
             font-weight: bold;
@@ -39,9 +43,11 @@
             line-height: 24px;
             color: $main-color;
         }
+
         &-critical-error {
-            margin-top: 30px;
+            margin-top: 20px;
         }
+
         &-success {
             font-weight: bold;
             font-size: 18px;

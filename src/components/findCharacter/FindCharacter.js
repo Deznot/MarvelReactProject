@@ -4,17 +4,18 @@ import * as Yup from 'yup';
 import useMarvelService from "../../services/MarvelService";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import ErrorMessage from "../errorMessage/ErrorMessage";
+import setContent from "../../utils/setContent";
 
 const FindCharacter = () => {
-    const { loading, error, getCharacterByName, clearError } = useMarvelService();
+    const { getCharacterByName, clearError, process, setProcess } = useMarvelService();
     const [character, setCharacter] = useState(null);
 
     const onRequest = (name) => {
         clearError();
         if (!name) return;
         getCharacterByName(name)
-            .then(onCharacterLoaded);
+            .then(onCharacterLoaded)
+            .then(() => setProcess('loaded'));
     }
 
     const onCharacterLoaded = (character) => {
@@ -31,8 +32,6 @@ const FindCharacter = () => {
         <div className="char__search-error">
             The character was not found. Check the name and try again
         </div>;
-
-    const errorMessage = error ? <ErrorMessage><div className="char__search-critical-error" /></ErrorMessage> : null;
 
     return (
         <div className="char__search-form">
@@ -58,15 +57,16 @@ const FindCharacter = () => {
                         <button
                             type='submit'
                             className="button button__main"
-                            disabled={loading}>
+                            disabled={process === 'loading'}>
                             <div className="inner">find</div>
                         </button>
                     </div>
                     <FormikErrorMessage component="div" className="char__search-error" name="charName" />
                 </Form>
             </Formik>
-            {content}
-            {errorMessage}
+            {setContent({ process, Component: () => content, LoadingComponent: false })}
+            {/* {content} */}
+            {/* {errorMessage} */}
         </div>
     );
 }

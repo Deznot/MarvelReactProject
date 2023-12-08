@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./charInfo.scss";
 import useMarvelService from "../../services/MarvelService";
 import setContent from "../../utils/setContent";
+import SelectChar from "../selectChar/SelectChar";
 
 const CharInfo = (props) => {
     const [char, setChar] = useState(null);
@@ -29,7 +30,7 @@ const CharInfo = (props) => {
 
     return (
         <div className="char__info">
-            {setContent(process, View, char)}
+            {setContent({ process, Component: View, data: char, WaitingComponent: SelectChar })}
         </div>
     );
 

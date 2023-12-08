@@ -2,24 +2,25 @@ import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import "./charList.scss";
 import useMarvelService from "../../services/MarvelService";
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import setContent from "../../utils/setContent";
 import Spinner from "../spinner/Spinner";
-import ErrorMessage from "../errorMessage/ErrorMessage";
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
-const setContent = ( process, Component, newItemLoading) => {
-    switch(process){
-        case "waiting":
-            return <Spinner />;
-        case "loading":
-            return newItemLoading? <Component/> : <Spinner/>;
-        case "loaded":
-            return <Component/>
-        case "error" :
-            return <ErrorMessage/>
-        default :
-            throw new Error('Unexpected process');
-    }
-}
+// const setContent = (process, Component, newItemLoading) => {
+
+//     switch (process) {
+//         case 'waiting':
+//             return newItemLoading? <Component /> : <Spinner />;
+//         case 'loading':
+//             return <Spinner />;
+//         case 'loaded':
+//             return <Component />;
+//         case 'error':
+//             return <ErrorMessage />
+//         default:
+//             throw new Error('Unexpected process state');
+//     }
+// }
 
 const CharList = (props) => {
     const [charList, setCharList] = useState([]);
@@ -27,7 +28,7 @@ const CharList = (props) => {
     const [offset, setOffset] = useState(0);
     const [charEnded, setCharEnded] = useState(false);
 
-    const { loading, getAllCharacters, error, clearError, process, setProcess } = useMarvelService();
+    const { getAllCharacters, clearError, process, setProcess } = useMarvelService();
 
     useEffect(() => {
         onRequest(offset, true);
@@ -47,7 +48,7 @@ const CharList = (props) => {
         initial ? setNewItemLoading(false) : setNewItemLoading(true);
         getAllCharacters(offset)
             .then(onCharListLoaded)
-            .then(() => setProcess("loaded"))
+            .then(() => setProcess('loaded'));
     }
 
     const onCharListLoaded = (newCharList) => {
@@ -79,7 +80,6 @@ const CharList = (props) => {
             switch (e.code) {
                 case 'ArrowLeft':
                     if (i - 1 < 0) {
-                        console.log(cardRefs.current.length);
                         cardRefs.current[cardRefs.current.length - 1].focus();
                     } else {
                         cardRefs.current[i - 1].focus();
@@ -139,14 +139,12 @@ const CharList = (props) => {
         )
     }
 
-
-    // const dataLoaded = loading && !newItemLoading ? <Spinner /> : null;
-    // const errorMessage = error ? <ErrorMessage /> : null;
-    // const cards = renderCard(charList);
+    const WaitingComponent = newItemLoading ? () => renderCard(charList) : () => <Spinner />;
+    // WaitingComponent: newItemLoading ? () => renderCard(charList) : () => <Spinner />
 
     return (
         <div className="char__list">
-            {setContent(process, ()=>renderCard(charList), newItemLoading)}
+            {setContent({ process, Component: () => renderCard(charList), LoadingComponent: WaitingComponent })}
             <button
                 className="button button__long button__main"
                 disabled={newItemLoading}
