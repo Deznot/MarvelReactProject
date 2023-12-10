@@ -5,7 +5,6 @@ import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 import { Link } from "react-router-dom";
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
-import setContent from "../../utils/setContent";
 
 const ComicsList = () => {
     const [comics, setComics] = useState([]);
@@ -21,7 +20,8 @@ const ComicsList = () => {
     const onRequest = (offset, initial) => {
         initial ? setNewItemLoading(false) : setNewItemLoading(true);
         getAllComics(offset)
-            .then(onComicsListLoaded);
+            .then(onComicsListLoaded)
+            .then(setProcess('loaded'));
     }
 
     const onComicsListLoaded = (newComics) => {
@@ -34,7 +34,6 @@ const ComicsList = () => {
         setOffset((offset) => offset + 8);
         setNewItemLoading(false);
         setComicsEnded(ended);
-        setProcess('loaded');
     }
 
     const renderComics = (comicsList) => {
@@ -70,9 +69,15 @@ const ComicsList = () => {
         );
     }
 
+    const spinner = loading && !newItemLoading ? <Spinner /> : null;
+    const errorMessage = error ? <ErrorMessage /> : null;
+    const rendComics = renderComics(comics);
+
     return (
         <div className="comics__list">
-            {setContent({ process, Component: () => renderComics(comics), LoadingComponent: newItemLoading ? () => renderComics(comics) : "spinner"})}
+            {errorMessage}
+            {spinner}
+            {rendComics}
             <button
                 disabled={newItemLoading}
                 style={{ 'display': comicsEnded ? 'none' : 'block' }}
