@@ -6,7 +6,7 @@ const setContent = ({ process, Component, data, WaitingComponent, waitingData = 
     if (LoadingComponent === 'spinner') {
         LoadingComponent = Spinner;
     }
-    console.log(process);
+    
     switch (process) {
         case "waiting":
             return WaitingComponent ? <WaitingComponent data={waitingData} /> : null;
