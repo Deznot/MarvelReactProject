@@ -2,6 +2,7 @@ import AppBanner from "../appBanner/AppBanner";
 import ComicsList from "../comicsList/ComicsList";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 import { Helmet } from "react-helmet";
+import "../../style/button.scss";
 
 const ComicsPage = () => {
     // let location = useLocation(); show current route 
