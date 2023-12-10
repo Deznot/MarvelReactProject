@@ -6,22 +6,6 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import setContent from "../../utils/setContent";
 import Spinner from "../spinner/Spinner";
 
-// const setContent = (process, Component, newItemLoading) => {
-
-//     switch (process) {
-//         case 'waiting':
-//             return newItemLoading? <Component /> : <Spinner />;
-//         case 'loading':
-//             return <Spinner />;
-//         case 'loaded':
-//             return <Component />;
-//         case 'error':
-//             return <ErrorMessage />
-//         default:
-//             throw new Error('Unexpected process state');
-//     }
-// }
-
 const CharList = (props) => {
     const [charList, setCharList] = useState([]);
     const [newItemLoading, setNewItemLoading] = useState(false);
@@ -139,12 +123,9 @@ const CharList = (props) => {
         )
     }
 
-    const WaitingComponent = newItemLoading ? () => renderCard(charList) : () => <Spinner />;
-    // WaitingComponent: newItemLoading ? () => renderCard(charList) : () => <Spinner />
-
     return (
         <div className="char__list">
-            {setContent({ process, Component: () => renderCard(charList), LoadingComponent: WaitingComponent })}
+            {setContent({ process, Component: () => renderCard(charList), LoadingComponent: newItemLoading ? () => renderCard(charList) : Spinner})}
             <button
                 className="button button__long button__main"
                 disabled={newItemLoading}

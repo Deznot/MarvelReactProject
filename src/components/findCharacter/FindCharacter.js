@@ -64,9 +64,7 @@ const FindCharacter = () => {
                     <FormikErrorMessage component="div" className="char__search-error" name="charName" />
                 </Form>
             </Formik>
-            {setContent({ process, Component: () => content, LoadingComponent: false })}
-            {/* {content} */}
-            {/* {errorMessage} */}
+            {setContent({ process, Component: () => content })}
         </div>
     );
 }

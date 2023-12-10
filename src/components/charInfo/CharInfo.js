@@ -30,7 +30,7 @@ const CharInfo = (props) => {
 
     return (
         <div className="char__info">
-            {setContent({ process, Component: View, data: char, WaitingComponent: SelectChar })}
+            {setContent({ process, Component: View, data: char, WaitingComponent: SelectChar, LoadingComponent: "spinner" })}
         </div>
     );
 

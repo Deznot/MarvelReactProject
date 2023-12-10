@@ -5,13 +5,14 @@ import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 import { Link } from "react-router-dom";
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import setContent from "../../utils/setContent";
 
 const ComicsList = () => {
     const [comics, setComics] = useState([]);
     const [offset, setOffset] = useState(0);
     const [comicsEnded, setComicsEnded] = useState(false);
     const [newItemLoading, setNewItemLoading] = useState(false);
-    const { loading, error, getAllComics } = useMarvelService();
+    const { loading, error, getAllComics,process,setProcess } = useMarvelService();
 
     useEffect(() => {
         onRequest(offset, true);
@@ -33,6 +34,7 @@ const ComicsList = () => {
         setOffset((offset) => offset + 8);
         setNewItemLoading(false);
         setComicsEnded(ended);
+        setProcess('loaded');
     }
 
     const renderComics = (comicsList) => {
@@ -68,15 +70,9 @@ const ComicsList = () => {
         );
     }
 
-    const spinner = loading && !newItemLoading ? <Spinner /> : null;
-    const errorMessage = error ? <ErrorMessage /> : null;
-    const rendComics = renderComics(comics);
-
     return (
         <div className="comics__list">
-            {errorMessage}
-            {spinner}
-            {rendComics}
+            {setContent({ process, Component: () => renderComics(comics), LoadingComponent: newItemLoading ? () => renderComics(comics) : "spinner"})}
             <button
                 disabled={newItemLoading}
                 style={{ 'display': comicsEnded ? 'none' : 'block' }}

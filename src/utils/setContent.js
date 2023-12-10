@@ -1,13 +1,17 @@
 import Spinner from "../components/spinner/Spinner";
 import ErrorMessage from "../components/errorMessage/ErrorMessage";
+import "../style/button.scss";
 
-const setContent = ({ process, Component, data, WaitingComponent, waitingData = null, LoadingComponent = true }) => {
-
+const setContent = ({ process, Component, data, WaitingComponent, waitingData = null, LoadingComponent}) => {
+    if (LoadingComponent === 'spinner') {
+        LoadingComponent = Spinner;
+    }
+    console.log(process);
     switch (process) {
         case "waiting":
             return WaitingComponent ? <WaitingComponent data={waitingData} /> : null;
         case "loading":
-            return LoadingComponent ? <Spinner /> : null;
+            return LoadingComponent? <LoadingComponent/> : null;
         case "loaded":
             return <Component data={data} />
         case "error":
